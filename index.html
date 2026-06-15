@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sebuah Catatan Kecil</title>
+    <style>
+        /* CSS untuk tampilan yang elegan dan gelap */
+        body { 
+            margin: 0; 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            background: linear-gradient(to bottom, #1a1a1a, #0d0d0d); 
+            color: #e0e0e0; 
+            font-family: 'Segoe UI', sans-serif; 
+            text-align: center; 
+            overflow: hidden; 
+        }
+        
+        .box { 
+            width: 85%; 
+            max-width: 450px; 
+            padding: 40px; 
+            background: rgba(30, 30, 30, 0.8); 
+            backdrop-filter: blur(10px);
+            border-radius: 20px; 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5); 
+            transition: all 0.5s ease; 
+        }
+
+        h2 { margin-bottom: 20px; color: #bb86fc; }
+
+        button { 
+            background: #bb86fc; 
+            border: none; 
+            padding: 12px 25px; 
+            border-radius: 8px; 
+            color: #000; 
+            font-weight: bold; 
+            cursor: pointer; 
+            margin-top: 25px; 
+            transition: 0.3s; 
+        }
+
+        button:hover { background: #9965f4; transform: scale(1.05); }
+
+        .hidden { display: none; opacity: 0; }
+
+        /* Animasi Bunga */
+        .flower { position: absolute; font-size: 24px; animation: float linear infinite; }
+        @keyframes float { 0% { transform: translateY(110vh); } 100% { transform: translateY(-10vh); } }
+    </style>
+</head>
+<body>
+
+    <div id="step1" class="box">
+        <h2>Halo.</h2>
+        <p>Aku ingin bicara sesuatu, tapi lebih nyaman kalau lewat sini.</p>
+        <button onclick="next(1)">Lanjut</button>
+    </div>
+
+    <div id="step2" class="box hidden">
+        <h2>Jujur...</h2>
+        <p>Aku sadar candaanku soal game kemarin itu keterlaluan. Bilang kamu "bot" dan ngeremehin *poke* kamu itu nggak bijak dan aku benar-benar menyesal sudah bikin kamu sakit hati.</p>
+        <button onclick="next(2)">Lanjut</button>
+    </div>
+
+    <div id="step3" class="box hidden">
+        <h2>Maafkan aku ya.</h2>
+        <p>Aku janji ke depannya bakal lebih menghargai kamu dan nggak mengulanginya lagi. Makasih ya sudah mau luangin waktu buat baca ini.</p>
+        <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.7;">Aku tunggu kabarnya ya.</p>
+    </div>
+
+    <script>
+        function next(step) {
+            document.getElementById('step' + step).style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('step' + step).classList.add('hidden');
+                document.getElementById('step' + (step + 1)).classList.remove('hidden');
+                document.getElementById('step' + (step + 1)).style.opacity = '1';
+            }, 500);
+        }
+
+        // Efek bunga jatuh
+        function createFlower() {
+            const f = document.createElement('div');
+            f.innerHTML = '🌸';
+            f.className = 'flower';
+            f.style.left = Math.random() * 100 + 'vw';
+            f.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            document.body.appendChild(f);
+            setTimeout(() => f.remove(), 10000);
+        }
+        setInterval(createFlower, 2000);
+    </script>
+</body>
+</html>
